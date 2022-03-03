@@ -3,6 +3,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDAO {
 	private Connection connection;
@@ -39,5 +41,33 @@ public class ProductDAO {
 		PreparedStatement pstm = connection.prepareStatement("DELETE FROM PRODUTO WHERE ID = ?");
 		pstm.setInt(1, productNumberRemoved);
 		pstm.execute();
+	}
+	
+	public void updateProduct() throws SQLException {
+		PreparedStatement pstm = connection.prepareStatement("UPDATE Produto SET nome = 'Palio 1.8 R '  WHERE ID = ?");
+		pstm.setInt(1, 1);
+		pstm.execute();
+	}
+	
+	public List<Product> list() throws SQLException{
+		List<Product> products = new ArrayList<Product>();
+		
+		String sql = "SELECT ID, NOME, DESCRICAO, QUANTIDADE, PRECO FROM PRODUTO";
+		
+		try(PreparedStatement pstm = connection.prepareStatement(sql)){
+			pstm.execute();
+			try(ResultSet rst = pstm.getResultSet()){
+				while(rst.next()) {
+					Product product =
+							new Product(rst.getInt(1), 
+									rst.getString(2), 
+									rst.getString(3), 
+									rst.getInt(4), 
+									rst.getDouble(5));
+					products.add(product);
+				}
+			}
+		}
+		return products;
 	}
 }

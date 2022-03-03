@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class ProductApplication {
@@ -8,7 +9,7 @@ public class ProductApplication {
 		int option; 
 		
 		ConnectionFactory connectionFactory = new ConnectionFactory();
-		Connection connection = connectionFactory.changeConnection();
+		Connection connection = connectionFactory.recoverConnection();
 		
 		ProductDAO product = new ProductDAO(connection);
 		
@@ -35,14 +36,18 @@ public class ProductApplication {
 				product.add(palio);
 				product.add(hilux);
 				product.add(astra);
+				
 				break;
 				
 			case 2:
-				System.out.println("Opção 2");
+				product.updateProduct();
+				List<Product> listProducts = product.list();
+				listProducts.stream().forEach(lp -> System.out.println(lp));
 				break;
 				
 			case 3:
 				product.removeProduct(2);
+				
 				break;
 		}
 	}
