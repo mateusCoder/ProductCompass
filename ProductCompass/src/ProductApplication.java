@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class ProductApplication {
 	public static void main(String[] args) throws SQLException {
 		
-		int option; 
+		int option = -1; 
 		
 		ConnectionFactory connectionFactory = new ConnectionFactory();
 		Connection connection = connectionFactory.recoverConnection();
@@ -22,9 +22,13 @@ public class ProductApplication {
 		System.out.println("2 - Atualizar primeiro produto ");
 		System.out.println("3 - Excluir segundo produto ");
 		System.out.println("0 - Sair" + "\n");
-		option = Integer.parseInt(read.next());
 		
-		switch(option) {
+		while(option != 0) {
+			option = Integer.parseInt(read.next());
+			
+			List<Product> listProducts;
+			
+			switch(option) {
 			case 0:
 				System.exit(0);
 				
@@ -36,19 +40,25 @@ public class ProductApplication {
 				product.add(palio);
 				product.add(hilux);
 				product.add(astra);
-				
+				listProducts = product.list();
+				listProducts.stream().forEach(lp -> System.out.println(lp));
 				break;
 				
 			case 2:
 				product.updateProduct();
-				List<Product> listProducts = product.list();
+				listProducts = product.list();
 				listProducts.stream().forEach(lp -> System.out.println(lp));
 				break;
 				
 			case 3:
 				product.removeProduct(2);
-				
+				listProducts = product.list();
+				listProducts.stream().forEach(lp -> System.out.println(lp));
 				break;
+				
+			default:
+				System.out.println("[Dado Inválido] Digite uma opção válida!");
+			}
 		}
 	}
 }
