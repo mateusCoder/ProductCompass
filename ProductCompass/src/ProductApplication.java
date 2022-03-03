@@ -28,7 +28,7 @@ public class ProductApplication {
 				System.exit(0);
 				
 			case 1:
-				product.remove(0);
+				product.reset();
 				Product hilux = new Product("Hilux", "Hilux 3.0 Turbo Diesel", 1, 150000.00);
 				Product palio = new Product("Palio", "Palio Fire 1.0", 2, 12000.00);
 				Product astra = new Product("Astra", "Astra GM II 2.0", 3, 35000.00);
@@ -42,7 +42,7 @@ public class ProductApplication {
 				break;
 				
 			case 3:
-				System.out.println("Opção 3");
+				product.removeProduct(2);
 				break;
 		}
 	}

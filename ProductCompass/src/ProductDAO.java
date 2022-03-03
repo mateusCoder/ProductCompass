@@ -30,9 +30,14 @@ public class ProductDAO {
 		}
 	}
 	
-	public void remove(int itemNumberRemoved) throws SQLException {
-		PreparedStatement pstm = connection.prepareStatement("DELETE FROM PRODUTO WHERE ID >= ?");
-		pstm.setInt(1, itemNumberRemoved);
+	public void reset() throws SQLException {
+		PreparedStatement pstm = connection.prepareStatement("TRUNCATE TABLE PRODUTO");
+		pstm.execute();
+	}
+	
+	public void removeProduct(int productNumberRemoved) throws SQLException {
+		PreparedStatement pstm = connection.prepareStatement("DELETE FROM PRODUTO WHERE ID = ?");
+		pstm.setInt(1, productNumberRemoved);
 		pstm.execute();
 	}
 }
