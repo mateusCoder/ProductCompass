@@ -1,0 +1,10 @@
+<h1> SQL Commands </h1>
+
+CREATE DATABASE produtodatabase; <br>
+
+USE produtodatabase; <br>
+
+CREATE TABLE produto (ID INT AUTO_INCREMENT, NOME VARCHAR(100), DESCRICAO VARCHAR(300), QUANTIDADE INT, PRECO DOUBLE, PRIMARY KEY(ID)) ENGINE = INNODB; <br>
+
+
+
