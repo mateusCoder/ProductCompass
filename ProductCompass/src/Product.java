@@ -43,6 +43,10 @@ public class Product {
 	
 	@Override
 	public String toString() {
-		return String.format("%d, %s, %s, %d, %.2f", this.id, this.name, this.description, this.amount, this.price);
+		return String.format("ID %d \n"
+				+ "Nome %s \n"
+				+ "Descrição %s \n"
+				+ "Quantidade %d \n"
+				+ "Preço R$ %.2f \n", this.id, this.name, this.description, this.amount, this.price);
 	}
 }
